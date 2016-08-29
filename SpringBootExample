@@ -1,0 +1,68 @@
+Building an application with Spring boot :
+
+1. Add dependency to maven :
+
+  <dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+		<version>1.4.0.RELEASE</version>
+	</dependency>
+	
+2. Add plugin in <build> tag in pom.xml (Optional)
+
+    <plugin>
+			<groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+		
+3. Create a Controller file :
+
+e.g. HelloController.java
+
+package main.java.hello;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestController
+public class HelloController {
+
+    @RequestMapping("/")
+    public String index() {
+        return "Coming from Spring boot!";
+    }
+
+}
+
+4. Create Application file :
+
+package main.java.hello;
+
+import java.util.Arrays;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
+
+        System.out.println("Let's inspect the beans provided by Spring Boot:");
+
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        int i = 0;
+        for (String beanName : beanNames) {
+        	
+        	
+            System.out.println(++i + ". " +beanName);
+        }
+    }
+
+}
+
+
+And you are done!
